@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap');
+
+:root {
+  --accent: #00d4aa;
+  --accent-blue: #3b82f6;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  --accent-purple: #a855f7;
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #162032;
+  --border: #334155;
+  --text: #f1f5f9;
+  --muted: #64748b;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Syne', system-ui, sans-serif; overflow-x: hidden; margin: 0; }
+
+/* Subtle grid bg */
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: linear-gradient(rgba(0,212,170,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,170,0.018) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+/* Animations */
+@keyframes livePulse { 0%,100% { box-shadow:0 0 0 0 rgba(0,212,170,0.6); } 50% { box-shadow:0 0 0 7px rgba(0,212,170,0); } }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideInLeft { from { opacity:0; transform:translateX(-16px); } to { opacity:1; transform:translateX(0); } }
+@keyframes slideInRight { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0); } }
+@keyframes slideInDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+@keyframes barFill { from { width:0 !important; } }
+@keyframes spin { to { transform:rotate(360deg); } }
+@keyframes glowPulse { 0%,100% { box-shadow:0 0 6px rgba(244,63,94,0.5); } 50% { box-shadow:0 0 20px rgba(244,63,94,0.9); } }
+@keyframes numberPop { 0% { transform:scale(1); } 50% { transform:scale(1.08); } 100% { transform:scale(1); } }
+@keyframes shimmerAnim { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
+@keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+@keyframes countdownShrink { from { width:100%; } to { width:0%; } }
+@keyframes sparkle { 0%,100% { opacity:0.4; transform:scale(0.8); } 50% { opacity:1; transform:scale(1.2); } }
+
+/* Utility classes */
+.live-dot { animation: livePulse 2s ease-in-out infinite; }
+.anomaly-item { animation: slideInLeft 0.35s ease forwards; }
+.event-row { animation: slideInDown 0.25s ease forwards; }
+.funnel-bar { animation: barFill 1s cubic-bezier(0.4,0,0.2,1) forwards; }
+.number-pop { animation: numberPop 0.4s ease; }
+.severity-high-glow { animation: glowPulse 2s ease-in-out infinite; }
+.mono { font-family: 'JetBrains Mono', monospace !important; }
+.section-label { font-size:10px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); }
+
+.shimmer {
+  background: linear-gradient(90deg, #1e293b 25%, #2d3f55 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmerAnim 1.5s infinite;
+  border-radius: 6px; height: 32px; width: 90px; display: inline-block;
+}
+
+/* Card styles */
+.glow-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  position: relative; overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.glow-card:hover {
+  border-color: rgba(0,212,170,0.35);
+  box-shadow: 0 0 30px rgba(0,212,170,0.07), 0 12px 40px rgba(0,0,0,0.4);
+  transform: translateY(-3px);
+}
+
+/* Page-specific backgrounds */
+.page-dashboard { background: linear-gradient(135deg, #0f172a 0%, #0d1f3c 100%); min-height: 100vh; }
+.page-analytics { background: linear-gradient(135deg, #0f172a 0%, #1a0a2e 100%); min-height: 100vh; }
+.page-shopstream { background: linear-gradient(135deg, #0f172a 0%, #0a1f1a 100%); min-height: 100vh; }
+
+/* KPI card specific */
+.kpi-sessions { border-top: 3px solid #00d4aa !important; }
+.kpi-cvr { border-top: 3px solid #3b82f6 !important; }
+.kpi-bounce { border-top: 3px solid #f59e0b !important; }
+.kpi-users { border-top: 3px solid #f43f5e !important; }
+
+/* Gradient text */
+.gradient-text { background: linear-gradient(135deg, #00d4aa, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.gradient-text-warm { background: linear-gradient(135deg, #f59e0b, #f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.gradient-text-purple { background: linear-gradient(135deg, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Toastify overrides */
+.Toastify__toast { background: #1e293b !important; border: 1px solid #334155 !important; border-radius: 14px !important; font-family: 'Syne', sans-serif !important; color: #f1f5f9 !important; box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important; }
+.Toastify__progress-bar--success { background: linear-gradient(90deg, #00d4aa, #10b981) !important; }
+.Toastify__progress-bar--error { background: linear-gradient(90deg, #ef4444, #f43f5e) !important; }
+.Toastify__progress-bar--warning { background: linear-gradient(90deg, #f59e0b, #f97316) !important; }
+.Toastify__progress-bar--info { background: linear-gradient(90deg, #3b82f6, #6366f1) !important; }
+.Toastify__close-button { color: #64748b !important; }
+
+/* Product card */
+.product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); }
+.product-card:hover { border-color: rgba(0,212,170,0.4); transform: translateY(-7px); box-shadow: 0 24px 56px rgba(0,0,0,0.5), 0 0 32px rgba(0,212,170,0.08); }
+.product-card:hover .product-img { transform: scale(1.07); }
+.product-img { transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); width:100%; height:100%; object-fit:cover; }
+
+/* User table row */
+.user-row { transition: all 0.2s; }
+.user-row:hover { background: rgba(0,212,170,0.04) !important; }
