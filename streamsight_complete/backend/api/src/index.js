@@ -30,6 +30,8 @@ app.use("/api/metrics", metricsRouter);
 app.use("/api/anomalies", anomaliesRouter);
 app.use("/api/simulate-event", simulateRouter);
 app.get("/health", (req, res) => res.json({ status: "ok", time: new Date().toISOString() }));
+const userActivityRoute = require("./routes/userActivity");
+app.use("/api/user-activity", userActivityRoute);
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/streamsight";
 const PORT = process.env.API_PORT || 4000;
